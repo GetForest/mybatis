@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.zhangfei.dao.UserDao">
+    <select  id="selectUser" resultType="com.zhangfei.pojo.User" >
+        select * from mybatis.user
+    </select>
+
+    <select id="selectUserById" resultType="com.zhangfei.pojo.User" >
+        select * from user where id=#{id}
+    </select>
+
+    <select id="selectUserByNP" resultType="com.zhangfei.pojo.User">
+        select * from user where name = #{name} and pwd = #{password}
+    </select>
+
+    <select id="selectUserByNP2" resultType="com.zhangfei.pojo.User" parameterType="map">
+        select * from user where name = #{name1} and pwd = #{password}
+    </select>
+
+    <insert id="addUser" parameterType="com.zhangfei.pojo.User">
+        insert into user(id,name,pwd) values (#{id},#{name},#{pwd})
+    </insert>
+
+    <update id="updateUser" parameterType="com.zhangfei.pojo.User">
+        update user set name =#{name},pwd=#{pwd} where  id=#{id}
+    </update>
+
+    <delete id="deleteUser" parameterType="com.zhangfei.pojo.User"  >
+        delete from  user where id =#{id}
+    </delete>
+
+    <select id="selectLikes" resultType="com.zhangfei.pojo.User" parameterType="string">
+        select * from user  where name like #{value}
+    </select>
+
+
+</mapper>
+

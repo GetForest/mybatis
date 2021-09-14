@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--导入properties文件-->
+    <properties resource="db.properties"/>
+    <settings>
+        <setting name="cacheEnabled" value="true"/>
+
+        <setting name="lazyLoadingEnabled" value="true"/>
+                <!-- 标准的日志实现-->
+<!--    <setting name="logImpl" value="STDOUT_LOGGING"/>-->
+
+
+        <setting name="logImpl" value="LOG4J"/>
+
+
+        <setting name="multipleResultSetsEnabled" value="true"/>
+        <setting name="useColumnLabel" value="true"/>
+        <setting name="useGeneratedKeys" value="false"/>
+        <setting name="autoMappingBehavior" value="PARTIAL"/>
+        <setting name="autoMappingUnknownColumnBehavior" value="WARNING"/>
+        <setting name="defaultExecutorType" value="SIMPLE"/>
+        <setting name="defaultStatementTimeout" value="25"/>
+        <setting name="defaultFetchSize" value="100"/>
+        <setting name="safeRowBoundsEnabled" value="false"/>
+        <setting name="mapUnderscoreToCamelCase" value="false"/>
+        <setting name="localCacheScope" value="SESSION"/>
+        <setting name="jdbcTypeForNull" value="OTHER"/>
+        <setting name="lazyLoadTriggerMethods" value="equals,clone,hashCode,toString"/>
+    </settings>
+
+<!--    类型别名是为 Java 类型设置一个短的名字。它只和 XML 配置有关，存在的意义仅在于用来减少类完全限定名的冗余。-->
+
+<!--    配置别名,注意顺序-->
+    <typeAliases>
+        <typeAlias type="com.zhangfei.pojo.User" alias="User"/>
+    </typeAliases>
+
+<!--    <typeHandlers>类型处理器 </typeHandlers>-->
+
+    <environments default="development">
+<!--        environment对应 一个sqlsessionFactory-->
+        <environment id="development">
+<!--            transactionManger 有两种事务管理器 JDBC 和 MANAGED-->
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <!--注册相应mapper到mybatis-->
+<mappers>
+    <mapper resource="com/zhangfei/dao/Mapper.xml"/>
+<!--        <mapper class="com.zhangfei.dao.UserDao"/>-->
+<!--    <package name="com.zhangfei.dao"/>-->
+<!--    这class是 真滴 难用  只要接口和实现的接口名字 不一样 就找不到  不在同一个包也不行 拉跨-->
+<!--    package 也是奥 包下的命名要一致 -->
+
+</mappers>
+
+
+</configuration>
